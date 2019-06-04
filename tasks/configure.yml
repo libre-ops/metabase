@@ -1,0 +1,41 @@
+---
+
+- name: ensure metabase has started (this can take a while...)
+  uri:
+    url: "http://localhost:{{ metabase_port }}/api/session/properties"
+    status_code: 200
+  register: metabase_api_session
+  until: metabase_api_session is not failed
+  retries: 10
+  delay: 6
+
+- name: submit initial configuration
+  uri:
+    url: "http://localhost:{{ metabase_port }}/api/setup"
+    method: POST
+    body:
+      token: "{{ metabase_api_session.json.setup_token }}"
+      user:
+        first_name: "{{ metabase_admin.first_name }}"
+        last_name: "{{ metabase_admin.last_name }}"
+        email: "{{ metabase_admin.email }}"
+        password: "{{ metabase_admin.password }}"
+      prefs:
+        site_name: "{{ metabase_prefs.site_name }}"
+        allow_tracking: "{{ metabase_prefs.allow_tracking }}"
+    body_format: json
+    status_code: 200
+    headers:
+      Accept: "application/json"
+      Content-Type: "application/json"
+  register: metabase_api_setup
+  when: metabase_api_session.json.setup_token
+
+- name: create initial databases
+  include_tasks: add_database.yml
+  vars:
+    metabase_session: "{{ metabase_api_setup }}"
+  loop: "{{ metabase_databases }}"
+  loop_control:
+    loop_var: database_item
+  when: metabase_api_session.json.setup_token

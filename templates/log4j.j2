@@ -1,0 +1,29 @@
+log4j.rootLogger=WARN, file
+
+# log to a file
+log4j.appender.file=org.apache.log4j.RollingFileAppender
+log4j.appender.file.File={{ metabase_log_file }}
+log4j.appender.file.MaxFileSize=500MB
+log4j.appender.file.MaxBackupIndex=2
+log4j.appender.file.layout=org.apache.log4j.PatternLayout
+log4j.appender.file.layout.ConversionPattern=%d [%t] %-5p%c - %m%n
+
+# customizations by package
+
+log4j.logger.metabase.driver=INFO
+log4j.logger.metabase.plugins=INFO
+log4j.logger.metabase.middleware=INFO
+log4j.logger.metabase.models.permissions=INFO
+log4j.logger.metabase.query-processor.permissions=INFO
+log4j.logger.metabase.query-processor=INFO
+log4j.logger.metabase.sync=INFO
+log4j.logger.metabase.models.field-values=INFO
+
+log4j.logger.metabase.async.util=INFO
+log4j.logger.metabase.middleware.async=INFO
+log4j.logger.metabase.query-processor.async=INFO
+
+log4j.logger.metabase=INFO
+
+# c3p0 connection pools tend to log useless warnings way too often; only log actual errors
+log4j.logger.com.mchange=ERROR

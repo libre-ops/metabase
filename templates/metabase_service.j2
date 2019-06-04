@@ -1,0 +1,25 @@
+[Unit]
+Description=Metabase - Data visualization platform
+Documentation=https://www.metabase.com/docs/latest
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/java \
+    -Dlog4j.configuration=file:{{ metabase_working_directory }}/log4j.properties \
+    -jar {{ metabase_jarfile }}
+
+Type=simple
+User={{ metabase_user }}
+Group={{ metabase_group }}
+WorkingDirectory={{ metabase_working_directory }}
+
+SuccessExitStatus=143
+
+Restart=on-failure
+RestartSec=10
+
+{% include './environment.j2' %}
+
+
+[Install]
+WantedBy=multi-user.target

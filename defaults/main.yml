@@ -1,0 +1,34 @@
+---
+
+metabase_version: v0.32.8
+
+metabase_user: metabase
+metabase_group: metabase
+
+metabase_app_dir: /opt/metabase
+metabase_jarfile: "{{ metabase_app_dir }}/metabase.jar"
+
+metabase_log_dir: /var/log/metabase
+metabase_log_file: "{{ metabase_log_dir }}/metabase.log"
+metabase_working_directory: "/home/{{ metabase_user }}"
+
+metabase_host: localhost
+metabase_port: 3000
+
+metabase_admin:
+  first_name: Metabase
+  last_name: Admin
+  email: example@example.com
+  password: metabase123
+
+metabase_prefs:
+  site_name: Metabase
+  allow_tracking: false
+
+use_own_database: true
+metabase_db: metabase
+metabase_db_type: postgres
+metabase_db_host: localhost
+metabase_db_port: 5432
+metabase_db_user: metabase
+metabase_db_pass: changeme

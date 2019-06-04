@@ -1,0 +1,10 @@
+---
+
+- name: add metabase user
+  include_tasks: user.yml
+
+- name: install metabase
+  include_tasks: install.yml
+
+- name: configure metabase
+  include_tasks: configure.yml

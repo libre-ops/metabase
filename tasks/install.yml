@@ -1,0 +1,56 @@
+---
+
+- name: create log dir
+  file:
+    path: "{{ metabase_log_dir }}"
+    state: directory
+    mode: 0744
+    owner: "{{ metabase_user }}"
+    group: "{{ metabase_group }}"
+  become: yes
+
+- name: create app dir
+  file:
+    path: "{{ metabase_app_dir }}"
+    state: directory
+    mode: 0750
+    owner: root
+    group: "{{ metabase_group }}"
+  become: yes
+
+- name: download metabase
+  get_url:
+    url: "http://downloads.metabase.com/{{ metabase_version }}/metabase.jar"
+    dest: "{{ metabase_jarfile }}"
+    owner: root
+    group: "{{ metabase_group }}"
+    mode: 0750
+  become: yes
+
+- name: add logging config
+  template:
+    src: log4j.j2
+    dest: "{{ metabase_working_directory }}/log4j.properties"
+    owner: "{{ metabase_user }}"
+    group: "{{ metabase_group }}"
+    mode: 0640
+  become: yes
+
+- name: add metabase service
+  template:
+    src: metabase_service.j2
+    dest: /etc/systemd/system/metabase.service
+    mode: 0750
+  become: yes
+  notify:
+    - reload systemd
+    - restart metabase
+
+- name: enable metabase service
+  service:
+    name: metabase
+    state: started
+    enabled: yes
+
+- name: flush handlers
+  meta: flush_handlers

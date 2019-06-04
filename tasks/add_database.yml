@@ -1,0 +1,37 @@
+---
+
+- name: authenticate to api
+  uri:
+    url: "http://localhost:{{ metabase_port }}/api/session"
+    method: POST
+    body:
+      username: "{{ metabase_admin.email }}"
+      password: "{{ metabase_admin.password }}"
+    body_format: json
+    status_code: 200
+    headers:
+      Accept: "application/json"
+      Content-Type: "application/json"
+  register: metabase_session
+  when: metabase_session is undefined
+
+- name: add database # warning: this API endpoint is not idempotent!
+  uri:
+    url: "http://localhost:{{ metabase_port }}/api/database"
+    method: POST
+    body:
+      name: "{{ database_item.name }}"
+      engine: "{{ database_item.engine }}"
+      details:
+        dbname: "{{ database_item.dbname }}"
+        host: "{{ database_item.host }}"
+        port: "{{ database_item.port }}"
+        user: "{{ database_item.user }}"
+        password: "{{ database_item.password }}"
+        ssl: "{{ database_item.ssl }}"
+    body_format: json
+    status_code: 200
+    headers:
+      Accept: "application/json"
+      Content-Type: "application/json"
+      Cookie: "metabase.SESSION={{ metabase_session.json.id }};"

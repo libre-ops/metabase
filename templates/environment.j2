@@ -1,0 +1,12 @@
+Environment="MB_PASSWORD_COMPLEXITY=normal" # <weak|normal|strong>
+Environment="MB_PASSWORD_LENGTH=10"
+Environment="MB_JETTY_HOST={{ metabase_host }}"
+Environment="MB_JETTY_PORT={{ metabase_port }}"
+{% if use_own_database %}
+Environment="MB_DB_DBNAME={{ metabase_db }}"
+Environment="MB_DB_TYPE={{ metabase_db_type }}"
+Environment="MB_DB_PORT={{ metabase_db_port }}"
+Environment="MB_DB_USER={{ metabase_db_user }}"
+Environment="MB_DB_PASS={{ metabase_db_pass }}"
+Environment="MB_DB_HOST={{ metabase_db_host }}"
+{% endif %}

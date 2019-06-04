@@ -1,0 +1,12 @@
+---
+
+- name: create group
+  group:
+    name: "{{ metabase_group }}"
+  become: yes
+
+- name: create metabase user
+  user:
+    name: "{{ metabase_user }}"
+    group: "{{ metabase_group }}"
+  become: yes
