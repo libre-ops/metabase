@@ -78,7 +78,7 @@ You can also use this role to install Metabase on your local machine, for exampl
   connection: local
 
   roles:
-    - role: metabase
+    - role: libre_ops.metabase
       vars: 
         use_own_database: false
 ```
