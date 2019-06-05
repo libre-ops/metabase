@@ -6,6 +6,13 @@ This is an Ansible role for provisioning [Metabase](https://metabase.com), an op
 See the latest Metabase docs [here.](https://metabase.com/docs/latest) 
 
 
+Requirements
+------------
+
+You'll need to install Java OpenJDK version 8. It's been intentionally left out of the requirements in `meta/main.yml`
+so you can install it via whatever role you want, instead of enforcing a specific installation method.
+
+
 Defaults
 --------
 
@@ -67,7 +74,7 @@ Example playbook
   hosts: webservers
 
   roles:
-    - role: metabase
+    - role: libre_ops.metabase
 ```
 
 You can also use this role to install Metabase on your local machine, for example:
