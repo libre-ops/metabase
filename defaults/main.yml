@@ -21,6 +21,8 @@ metabase_admin:
   email: example@example.com
   password: metabase123
 
+metabase_databases: []
+
 metabase_prefs:
   site_name: Metabase
   allow_tracking: false
