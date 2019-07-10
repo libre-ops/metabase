@@ -9,7 +9,7 @@ See the latest Metabase docs [here.](https://metabase.com/docs/latest)
 Requirements
 ------------
 
-You'll need to install Java OpenJDK version 8. It's been intentionally left out of the requirements in `meta/main.yml`
+You'll need to install Java OpenJDK version 8 or higher. It's been intentionally left out of the requirements in `meta/main.yml`
 so you can install it via whatever role you want, instead of enforcing a specific installation method.
 
 
