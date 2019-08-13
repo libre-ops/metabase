@@ -7,6 +7,7 @@ metabase_group: metabase
 
 metabase_app_dir: /opt/metabase
 metabase_jarfile: "{{ metabase_app_dir }}/metabase.jar"
+metabase_jvm_args: ''
 
 metabase_log_dir: /var/log/metabase
 metabase_log_file: "{{ metabase_log_dir }}/metabase.log"

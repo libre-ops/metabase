@@ -6,7 +6,7 @@ After=network.target
 [Service]
 ExecStart=/usr/bin/java \
     -Dlog4j.configuration=file:{{ metabase_working_directory }}/log4j.properties \
-    {{ metabase_jvm_args | default(None) }} -jar {{ metabase_jarfile }}
+    {{ metabase_jvm_args }} -jar {{ metabase_jarfile }}
 
 Type=simple
 User={{ metabase_user }}
