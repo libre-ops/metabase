@@ -20,7 +20,7 @@
 
 - name: download metabase
   get_url:
-    url: "http://downloads.metabase.com/{{ metabase_version }}/metabase.jar"
+    url: "https://downloads.metabase.com/{{ metabase_version }}/metabase.jar"
     dest: "{{ metabase_jarfile }}"
     owner: root
     group: "{{ metabase_group }}"
