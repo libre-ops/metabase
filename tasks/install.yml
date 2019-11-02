@@ -11,7 +11,7 @@
 
 - name: create app dir
   file:
-    path: "{{ metabase_app_dir }}"
+    path: "{{ metabase_app_dir }}/{{ metabase_version }}"
     state: directory
     mode: 0750
     owner: root
@@ -20,7 +20,7 @@
 
 - name: download metabase
   get_url:
-    url: "http://downloads.metabase.com/{{ metabase_version }}/metabase.jar"
+    url: "https://downloads.metabase.com/{{ metabase_version }}/metabase.jar"
     dest: "{{ metabase_jarfile }}"
     owner: root
     group: "{{ metabase_group }}"

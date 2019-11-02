@@ -1,12 +1,13 @@
 ---
 
-metabase_version: v0.32.8
+metabase_version: v0.33.4
+metabase_upgrade_cleanup: true
 
 metabase_user: metabase
 metabase_group: metabase
 
 metabase_app_dir: /opt/metabase
-metabase_jarfile: "{{ metabase_app_dir }}/metabase.jar"
+metabase_jarfile: "{{ metabase_app_dir }}/{{ metabase_version }}/metabase.jar"
 metabase_jvm_args: "-Djava.net.preferIPv4Stack=True"
 
 metabase_log_dir: /var/log/metabase
