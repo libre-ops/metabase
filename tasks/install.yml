@@ -45,6 +45,7 @@
   notify:
     - reload systemd
     - restart metabase
+    - remove old versions
 
 - name: enable metabase service
   service:
