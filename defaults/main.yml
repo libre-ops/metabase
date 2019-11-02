@@ -1,6 +1,6 @@
 ---
 
-metabase_version: v0.32.8
+metabase_version: v0.33.4
 
 metabase_user: metabase
 metabase_group: metabase
