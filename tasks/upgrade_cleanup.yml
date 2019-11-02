@@ -1,0 +1,16 @@
+---
+
+- name: check for old versions
+  find:
+    paths: "{{ metabase_app_dir }}"
+    file_type: any
+    excludes: "{{ metabase_version }}"
+  become: yes
+  register: old_versions
+
+- name: delete old versions
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  become: yes
+  loop: "{{ old_versions.files }}"

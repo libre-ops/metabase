@@ -10,3 +10,7 @@
     name: metabase
     state: restarted
   become: yes
+
+- name: remove old versions
+  include_tasks: upgrade_cleanup.yml
+  when: metabase_upgrade_cleanup
