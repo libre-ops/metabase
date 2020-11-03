@@ -14,7 +14,7 @@
     url: "http://localhost:{{ metabase_port }}/api/setup"
     method: POST
     body:
-      token: "{{ metabase_api_session.json.setup_token }}"
+      token: "{{ metabase_api_session.json['setup-token'] }}"
       user:
         first_name: "{{ metabase_admin.first_name }}"
         last_name: "{{ metabase_admin.last_name }}"
@@ -29,7 +29,7 @@
       Accept: "application/json"
       Content-Type: "application/json"
   register: metabase_api_setup
-  when: metabase_api_session.json.setup_token
+  when: metabase_api_session.json["setup-token"]
 
 - name: create initial databases
   include_tasks: add_database.yml
@@ -38,4 +38,4 @@
   loop: "{{ metabase_databases }}"
   loop_control:
     loop_var: database_item
-  when: metabase_api_session.json.setup_token
+  when: metabase_api_session.json["setup-token"]
