@@ -1,6 +1,6 @@
 ---
 
-metabase_version: v0.37.0.2
+metabase_version: v0.41.5
 metabase_upgrade_cleanup: true
 
 metabase_user: metabase
